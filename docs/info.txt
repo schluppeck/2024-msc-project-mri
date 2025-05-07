@@ -1,0 +1,2 @@
+Things in this folder will get rendered to the github pages view of this repo. So they will end up at https://schluppeck.github.io/2024-msc-project-mri/
+
