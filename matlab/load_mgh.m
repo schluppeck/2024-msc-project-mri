@@ -65,10 +65,13 @@ if (strcmpi(fname((strlen(fname)-3):strlen(fname)), '.MGZ') || ...
   %  new_fname = sprintf('/tmp/tmp.load_mgh.%d.mgh', gzipped);
   %end
   
+  % Using the 2nd sprintfs below allows for spaces in the file names
   if(strcmp(computer,'MAC') || strcmp(computer,'MACI') || ismac)
-    [status,msg] = unix(sprintf('gunzip -c %s > %s', fname, new_fname)) ;
+    %[status,msg] = unix(sprintf('gunzip -c %s > %s', fname, new_fname));
+    [status,msg] = unix(sprintf("gunzip -c '%s' > '%s'", fname, new_fname));
   else
-    [status,msg] = unix(sprintf('zcat %s > %s', fname, new_fname)) ;
+    %[status,msg] = unix(sprintf('zcat %s > %s', fname, new_fname)) ;
+    [status,msg] = unix(sprintf("zcat '%s' > '%s'", fname, new_fname)) ;
   end
   if status ~= 0, fprintf('%s\n',msg) ; end
   fname = new_fname ;
@@ -157,6 +160,7 @@ MRI_LONG =   2 ;
 MRI_FLOAT =  3 ;
 MRI_SHORT =  4 ;
 MRI_BITMAP = 5 ;
+MRI_USHRT = 10 ;
 
 % Determine number of bytes per voxel
 switch type
@@ -165,6 +169,8 @@ switch type
  case MRI_UCHAR,
   nbytespervox = 1;
  case MRI_SHORT,
+  nbytespervox = 2;
+ case MRI_USHRT,
   nbytespervox = 2;
  case MRI_INT,
   nbytespervox = 4;
@@ -196,6 +202,8 @@ switch type
   dtype = 'short' ;
  case MRI_INT,
   dtype = 'int' ;
+ case MRI_USHRT,
+  dtype = 'uint16' ;       
 end
 
 % preserve volume datatype if env var is set to 1
