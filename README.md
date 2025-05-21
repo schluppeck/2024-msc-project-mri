@@ -3,6 +3,10 @@ MRI project for the 2024/25 MSc Cog Neurosci et al projects.
 
 analysis, scripts, code for MSc project. python and matlab code, etc.
 
+## Excercises
+
+- 2025-05-21: have a look at [analysis_code](./analysis_code/Readme.md) excercises. Will add more things in there as we go along.
+
 ## Timeseries analysis
 
 - [example fMRI data sub1 session 1 scan1](https://natural-scenes-dataset.s3.amazonaws.com/nsddata_timeseries/ppdata/subj01/func1pt8mm/timeseries/timeseries_session01_run01.nii.gz)
